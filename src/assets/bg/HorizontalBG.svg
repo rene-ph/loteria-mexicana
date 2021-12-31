@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#E84A3A;}
+	.st1{fill:white;}
+	.st2{fill:green;}
+	.st3{clip-path:url(#SVGID_2_);}
+	.st4{fill:white;}
+	.st5{clip-path:url(#SVGID_4_);}
+</style>
+<title>HorizontalBG</title>
+<g id="Layer_2">
+	<g id="HorizontalBG">
+		<rect class="st0" width="1920" height="1080"/>
+		<polygon class="st1" points="553,0 793,1080 1203,1080 1499,0 		"/>
+		<polygon class="st2" points="553,0 793,1080 0,1080 0,0 		"/>
+		<g>
+			<defs>
+				<polygon id="SVGID_1_" points="0,0 0,1080 801,1080 555,0 				"/>
+			</defs>
+			<clipPath id="SVGID_2_">
+				<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+			</clipPath>
+			<g class="st3">
+				<circle class="st4" cx="436.5" cy="391.5" r="31.5"/>
+				<circle class="st4" cx="266" cy="1049" r="23"/>
+				<circle class="st4" cx="51" cy="722" r="24"/>
+				<circle class="st4" cx="32" cy="353" r="19"/>
+				<circle class="st4" cx="427.5" cy="8.5" r="22.5"/>
+				<circle class="st4" cx="622" cy="947" r="29"/>
+				<polygon class="st4" points="27,504 75,566 85,458 				"/>
+				<polygon class="st4" points="-19,746 51,822 -19,918 				"/>
+				<polygon class="st4" points="428,947 437,858 523,902 				"/>
+				<path class="st4" d="M437,766c-10,2-100,16-100,16l10-106L437,766z"/>
+				<polygon class="st4" points="499,176 428,208 523,266 				"/>
+				<polygon class="st4" points="75,31 197,122 213,-50 				"/>
+				<polygon class="st4" points="369,1006 305,1108 468,1108 				"/>
+				<polygon class="st4" points="555,554 499,620 576,676 				"/>
+				<circle class="st4" cx="545" cy="490" r="22"/>
+				<circle class="st4" cx="4" cy="1021" r="23"/>
+				<polygon class="st4" points="-19,68 51,138 -35,176 				"/>
+				<ellipse class="st4" cx="693" cy="1079.5" rx="22" ry="22.5"/>
+			</g>
+		</g>
+		<polygon class="st4" points="258,231 199,281 276,306 		"/>
+		<circle class="st4" cx="227.5" cy="866.5" r="22.5"/>
+		<circle class="st4" cx="229.5" cy="337.5" r="16.5"/>
+		<g>
+			<defs>
+				<polygon id="SVGID_3_" points="1496,0 1209,1080 1920,1080 1920,0 				"/>
+			</defs>
+			<clipPath id="SVGID_4_">
+				<use xlink:href="#SVGID_3_"  style="overflow:visible;"/>
+			</clipPath>
+			<g class="st5">
+				<circle class="st1" cx="1561.5" cy="98.5" r="20.5"/>
+				<circle class="st1" cx="1749" cy="8" r="24"/>
+				<circle class="st1" cx="1871" cy="109" r="10"/>
+				<circle class="st1" cx="1910" cy="325" r="19"/>
+				<circle class="st1" cx="1671.5" cy="227.5" r="15.5"/>
+				<circle class="st1" cx="1881" cy="386" r="10"/>
+				<circle class="st1" cx="1912.5" cy="715.5" r="21.5"/>
+				<circle class="st1" cx="1907.5" cy="986.5" r="26.5"/>
+				<circle class="st1" cx="1768" cy="935" r="19"/>
+				<circle class="st1" cx="1723" cy="1076" r="18"/>
+				<circle class="st1" cx="1385" cy="842" r="16"/>
+				<circle class="st1" cx="1310" cy="865" r="7"/>
+				<circle class="st1" cx="1440.5" cy="973.5" r="13.5"/>
+				<circle class="st1" cx="1671.5" cy="619.5" r="15.5"/>
+				<circle class="st1" cx="1494" cy="517" r="21"/>
+				<circle class="st1" cx="1412.5" cy="699.5" r="27.5"/>
+				<circle class="st1" cx="1529" cy="660" r="12"/>
+				<polygon class="st1" points="1773,60 1749,99 1787,79 				"/>
+				<polygon class="st1" points="1473,227 1454,264 1494,264 				"/>
+				<polygon class="st1" points="1517,426 1463,452 1494,464 				"/>
+				<polygon class="st1" points="1637,376 1603,396 1637,414 				"/>
+				<polygon class="st1" points="1474,808 1463,865 1515,858 				"/>
+				<polygon class="st1" points="1725,954 1705,987 1741,987 				"/>
+				<polygon class="st1" points="1825,1013 1787,1058 1837,1058 				"/>
+				<polygon class="st1" points="1310,987 1283,1026 1331,1026 				"/>
+				<polygon class="st1" points="1357,1094 1385,1058 1401,1080 				"/>
+				<polygon class="st1" points="1427,558 1401,594 1427,604 				"/>
+				<path class="st1" d="M1800,445c-2,6-34,37-34,37l43,19L1800,445z"/>
+				<polygon class="st1" points="1812,604 1787,648 1812,635 				"/>
+				<polygon class="st1" points="1837,808 1800,796 1819,837 				"/>
+				<circle class="st1" cx="1529" cy="372" r="14"/>
+				<circle class="st1" cx="1539" cy="284" r="10"/>
+				<polygon class="st1" points="1809,196 1787,227 1818,227 				"/>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

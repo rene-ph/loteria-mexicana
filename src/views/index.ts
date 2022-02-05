@@ -1,3 +1,5 @@
-import { Play } from './Play';
+import { Home } from './Home';
+import { PlayOffline } from './PlayOffline';
+import { PlayOnline } from './PlayOnline';
 
-export { Play };
+export { PlayOffline, PlayOnline, Home };

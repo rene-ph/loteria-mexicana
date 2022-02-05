@@ -1,8 +1,19 @@
 import { Card } from '../Card/Card';
-import { useGenerationCards } from './hooks';
+import { useGenerationCards } from '../../hooks/useGenerationCards';
 
-export const Table = () :JSX.Element => {
-    const cards = useGenerationCards();
+type Props = {
+  initCard?: Array<string>
+}
+
+export const Table = ({ initCard }: Props) :JSX.Element => {
+    let cards = null;
+    
+    if (initCard && initCard?.length > 0) {
+      cards = initCard;
+    } else {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      cards = useGenerationCards();
+    }
 
     return (
     <div>

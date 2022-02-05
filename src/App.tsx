@@ -1,11 +1,21 @@
-import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { FirebaseAppProvider } from "reactfire";
 
-import { Play } from './views/index';
+import { fireBaseConfig } from './services/firebaseConfig'; 
+import { PlayOffline, PlayOnline, Home } from './views/index';
 
 function App() {
   return (
     <>
-     <Play />
+    <FirebaseAppProvider firebaseConfig={fireBaseConfig}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home /> } />
+          <Route path="/offline" element={<PlayOffline />} />
+          <Route path="/online/:roomId/:userId" element={<PlayOnline />} />
+        </Routes>
+      </Router>
+      </FirebaseAppProvider>
     </>
   );
 }

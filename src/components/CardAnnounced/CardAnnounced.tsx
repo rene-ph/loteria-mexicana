@@ -5,7 +5,11 @@ import { Card } from '../Card/Card';
 import { LinearProgressBar } from '../LinearProgressBar/LinearProgressBar';
 import { getCardAnnounced } from './hooks';
 
-export const CardAnnounced = () => {
+type Props = {
+  start?: boolean;
+}
+
+export const CardAnnounced = ({start}: Props): JSX.Element => {
 
     const [card, setCard] = useState(getCardAnnounced());
     const [currentValue, setCurrentValue] = useState(0);
@@ -33,6 +37,12 @@ export const CardAnnounced = () => {
       }, 3000);
       return () => clearInterval(timerCardRef.current as NodeJS.Timeout);
     }, [card]);
+
+    if (!start) {
+      return <>
+          <h2>Wait for the Game to Start</h2>
+      </>
+    }
 
     return ( 
     <Grid container 

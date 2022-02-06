@@ -4,7 +4,7 @@ import { CardHolderImage,TokenHolderImage,WrapperCard } from './Card.styled';
 import token from '../../assets/token.png';
 
 interface Props {
-    imageUrl: string;
+    imageUrl?: string | null;
     hasTokenEnabled?: boolean;
     [rest:string]: any;
 }
@@ -22,7 +22,7 @@ export const Card = ( {imageUrl, hasTokenEnabled=true, ...rest}: Props) : JSX.El
                 <CardHolderImage
                   onClick={handleClick}
                   alt="card" 
-                  src={imageUrl}
+                  src={imageUrl ? imageUrl : ""}
                   {...rest} />
 
                 { (showToken && hasTokenEnabled) ? (

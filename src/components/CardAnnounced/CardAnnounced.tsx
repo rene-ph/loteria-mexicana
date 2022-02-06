@@ -2,47 +2,41 @@ import Grid from '@mui/material/Grid';
 import { useEffect, useState, useRef } from 'react';
 
 import { Card } from '../Card/Card';
-import { LinearProgressBar } from '../LinearProgressBar/LinearProgressBar';
 import { getCardAnnounced } from './hooks';
+import { updateRoomReference } from '../../services/firebaseDb';
+import { onValue, set} from "firebase/database";
 
 type Props = {
   start?: boolean;
+  roomId?: string;
+  isGM?: boolean;
 }
 
-export const CardAnnounced = ({start}: Props): JSX.Element => {
+export const CardAnnounced = ({start, roomId, isGM}: Props): JSX.Element => {
 
-    const [card, setCard] = useState(getCardAnnounced());
-    const [currentValue, setCurrentValue] = useState(0);
-    const timerBarRef = useRef<NodeJS.Timer>();
+    const [card, setCard] = useState(null);    
     const timerCardRef = useRef<NodeJS.Timer>();
 
-    const progressBarInterval = 21;
-    const progressBarSize = 100;
+    useEffect(() => {
+      onValue(updateRoomReference(roomId, "initCard"), (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          setCard(data);
+        } 
+    });
+    },[start]);
 
     useEffect(() => {
-      timerBarRef.current = setInterval(() => {
-        if (currentValue >= progressBarSize) {
-          setCurrentValue(0);
-        } else {
-          setCurrentValue((oldValue) => oldValue + 1);
-        }
-      }, progressBarInterval);
-      return () => clearInterval(timerBarRef.current as NodeJS.Timeout);
-
-    },[currentValue]);
-
-    useEffect(() => {
-      timerCardRef.current = setInterval(() => {
-        setCard(getCardAnnounced());
-      }, 3000);
-      return () => clearInterval(timerCardRef.current as NodeJS.Timeout);
-    }, [card]);
-
-    if (!start) {
-      return <>
-          <h2>Wait for the Game to Start</h2>
-      </>
-    }
+      // This condition with the isGM is needed in order to not repeat the interval since we have multiple persons using this component
+      // at the same time 
+      if (start && isGM) {
+        timerCardRef.current = setInterval(() => {
+            const cardGenerated = getCardAnnounced();
+            set(updateRoomReference(roomId, "initCard"), cardGenerated);
+        }, 4000);
+        return () => clearInterval(timerCardRef.current as NodeJS.Timeout);
+      }
+    }, [start]);
 
     return ( 
     <Grid container 
@@ -53,15 +47,17 @@ export const CardAnnounced = ({start}: Props): JSX.Element => {
               alignSelf={"center"}>
           <Grid container
                 direction={"column"}
-                justifyContent={"flex-end"}
+                justifyContent={"flex-start"}
                 style={{height: '100%'}}>
-            <Card imageUrl={card}
-                  hasTokenEnabled={false} 
-                  style={{ height: "300px"}} />
+            { card && (
+              <Card imageUrl={card}
+                    hasTokenEnabled={false} 
+                    style={{ height: "400px"}} />
+            )}
+            { !card && (
+              <h3>The game will start soon,  Good luck!</h3>
+            )}
           </Grid>
-        </Grid>
-        <Grid item xs={4} style={{paddingTop: '30px'}} >
-          <LinearProgressBar currentValue={currentValue} />
         </Grid>
     </Grid>
     );

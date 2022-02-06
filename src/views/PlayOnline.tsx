@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import { getRoomReference, getPlayersReference, updateRoomReference } from '../services/firebaseDb';
 import { IRoom, ICurrentUser } from '../models/index';
 
-import { Table, CardAnnounced } from '../components/index';
+import { Table, CardAnnounced, PlayerList } from '../components/index';
 import { LoteriaBtn, LoteriaBtnWrapper } from '../components/Loteria/Loteria.styled';
 
 const initRoom: IRoom = {
@@ -40,6 +40,10 @@ const restartGame = (roomId: string | undefined) => {
     set(updateRoomReference(roomId, "winner"), null);
 }
 
+const updateWinner = (roomId: string | undefined, userName: string | undefined) => {
+    set(updateRoomReference(roomId, "winner"), userName);
+}
+
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -63,10 +67,6 @@ export const PlayOnline = () : JSX.Element => {
     const { roomId, userId } = useParams();
     const currentPlayers =  Object.values(room.players);
 
-    const updateWinner = (roomId: string | undefined, userName: string | undefined) => {
-        set(updateRoomReference(roomId, "winner"), userName);
-    }
-
     useEffect(() => {
         if (roomId && userId) {
             onValue(getPlayersReference(roomId, userId), (snapshot) => {
@@ -88,7 +88,6 @@ export const PlayOnline = () : JSX.Element => {
                     setOpenModal(false)
                     setWinner("");
                 }
-
             });
         }
     }, []);
@@ -98,10 +97,9 @@ export const PlayOnline = () : JSX.Element => {
                <>
                 <Grid container direction="row">
                     <Grid item xs={2}>
-                        <h1>Players in {roomId}</h1>
-                        { currentPlayers.map( (player: any, index: number) => {
-                            return (<h3 key={index}>{player.name}</h3>)
-                        })}
+                        <PlayerList 
+                            currentPlayers={currentPlayers}
+                        />
                         { user.isGM && (
                             <>
                                 <Button variant="contained" onClick={() => startGame(roomId)}>Start</Button>
@@ -116,28 +114,34 @@ export const PlayOnline = () : JSX.Element => {
                                 <Table initCard={user.table} />
                             </Grid>
                         </Grid>
-                        <Grid item xs={4}>
-                            <Grid container alignItems={"stretch"}>
-                            <Grid item xs={8}>
-                                <CardAnnounced start={room.start}/>
-                            </Grid>
+                        { room.start && (
                             <Grid item xs={4}>
-                            <LoteriaBtn onClick={(e) => updateWinner(roomId, userId)}>
-                                <LoteriaBtnWrapper>
-                                    L<br/>
-                                    O<br/>
-                                    T<br/>
-                                    E<br/>
-                                    R<br/>
-                                    I<br/>
-                                    A
-                                </LoteriaBtnWrapper>
-                            </LoteriaBtn>
+                                <Grid container alignItems={"stretch"}>
+                                    <Grid item xs={8}>
+                                        <CardAnnounced start={room.start}  roomId={roomId} isGM={user.isGM}/>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                    <LoteriaBtn onClick={(e) => updateWinner(roomId, userId)}>
+                                        <LoteriaBtnWrapper>
+                                            L<br/>
+                                            O<br/>
+                                            T<br/>
+                                            E<br/>
+                                            R<br/>
+                                            I<br/>
+                                            A
+                                        </LoteriaBtnWrapper>
+                                    </LoteriaBtn>
+                                    </Grid>
+                                </Grid>
                             </Grid>
+                        )}
+                        {!room.start && (
+                            <Grid item xs={4}> 
+                                <h3>Wait for the game to start :)</h3>
                             </Grid>
-                        </Grid>
+                        )}
                     </Grid>
-               
                 </Grid>
 
                 <Modal open={openModal} onClose={handleClose}>
@@ -151,7 +155,6 @@ export const PlayOnline = () : JSX.Element => {
                     </Box>
                 </Modal>
                </>
-
            ): null }
           
           </>)

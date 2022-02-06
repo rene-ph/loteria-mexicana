@@ -52,6 +52,12 @@ export class TableGenerator {
               card20, card21, card22, card23, card24, card25, card26, card27, card28, card29, card30,
               card31, card32, card33, card34, card35, card36, card37, card38, card39, card40,
               card41, card42, card43, card44, card45, card46];
+
+    static cardAnnounced = [ card1, card2, card3, card4, card5, card6, card7, card8, card9, card10,
+        card11, card12, card13, card14, card15, card16, card17, card18, card19,
+        card20, card21, card22, card23, card24, card25, card26, card27, card28, card29, card30,
+        card31, card32, card33, card34, card35, card36, card37, card38, card39, card40,
+        card41, card42, card43, card44, card45, card46];
     
     cardsShuffled: Array<string> = new Array<string>();
 
@@ -59,13 +65,36 @@ export class TableGenerator {
         this.generateTable();
     }
 
-    getRandomOneCard() {
-      return this.shuffle(this.cards).splice(0,1);
+    static getRandomOneCard() {
+      this.cardAnnounced = this.shuffle(this.cardAnnounced);
+      const newCards = [...this.cardAnnounced];
+      const cardToAnnounce = newCards.splice(0,1);
+      this.cardAnnounced = newCards;
+      return cardToAnnounce;
     }
 
     generateTable(): string[] {
       this.cardsShuffled = [...this.shuffle(this.cards).splice(0,16)];
       return this.cardsShuffled;
+    }
+
+    static  shuffle(array: string[]): string[] {
+        var i = array.length,
+            j = 0,
+            temp;
+    
+        while (i--) {
+    
+            j = Math.floor(Math.random() * (i+1));
+    
+            // swap randomly chosen element with current element
+            temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+    
+        }
+    
+        return array;
     }
 
     shuffle(array: string[]): string[] {

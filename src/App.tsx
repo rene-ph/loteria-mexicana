@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { FirebaseAppProvider } from "reactfire";
 
 import { fireBaseConfig } from './services/firebaseConfig'; 
-import { PlayOffline, PlayOnline, Home } from './views/index';
+import { PlayOnline, Home } from './views/index';
 
 function App() {
   return (
@@ -11,7 +11,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home /> } />
-          <Route path="/offline" element={<PlayOffline />} />
           <Route path="/online/:roomId/:userId" element={<PlayOnline />} />
         </Routes>
       </Router>

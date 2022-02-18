@@ -25,7 +25,8 @@ const initCurrentUser: ICurrentUser = {
     name: '',
     isGM: false,
     table: [],
-    winner: false
+    winner: false,
+    winTimes: 0,
 }
 
 const startGame = (roomId: string | undefined) => {
@@ -62,6 +63,7 @@ export const PlayOnline = () : JSX.Element => {
     const [room, setRoom] = useState<IRoom>(initRoom);
     const [user, setUser] = useState<ICurrentUser>(initCurrentUser);
     const [winner, setWinner] = useState<string>("");
+    const [passToNextCard, setPassToNextCard] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const handleClose = () => setOpenModal(false);
     const { roomId, userId } = useParams();
@@ -90,25 +92,26 @@ export const PlayOnline = () : JSX.Element => {
                 }
             });
         }
-    }, []);
+    }, [roomId, userId]);
     
     return(<>
            { currentPlayers.length > 0 ? (
                <>
                 <Grid container direction="row">
-                    <Grid item xs={2}>
+                    <Grid item xs={3}>
                         <PlayerList 
                             currentPlayers={currentPlayers}
                         />
                         { user.isGM && (
                             <>
                                 <Button variant="contained" onClick={() => startGame(roomId)}>Start</Button>
+                                <Button variant="contained" onClick={() => setPassToNextCard(!passToNextCard)}>Next Card</Button>
                                 <Button variant="contained" onClick={() => stopGame(roomId)}>Stop</Button>
                                 <Button variant="contained" onClick={() => restartGame(roomId)}>Restart</Button>
                             </>
                         )}
                     </Grid>
-                    <Grid item xs={10} container direction="row" style={{marginTop: '60px'}}>
+                    <Grid item xs={9} container direction="row" style={{marginTop: '60px'}}>
                         <Grid item xs={8}>
                             <Grid container justifyContent="center">
                                 <Table initCard={user.table} />
@@ -118,7 +121,7 @@ export const PlayOnline = () : JSX.Element => {
                             <Grid item xs={4}>
                                 <Grid container alignItems={"stretch"}>
                                     <Grid item xs={8}>
-                                        <CardAnnounced start={room.start}  roomId={roomId} isGM={user.isGM}/>
+                                        <CardAnnounced start={room.start}  roomId={roomId} isGM={user.isGM} nextCard={passToNextCard}/>
                                     </Grid>
                                     <Grid item xs={4}>
                                     <LoteriaBtn onClick={(e) => updateWinner(roomId, userId)}>

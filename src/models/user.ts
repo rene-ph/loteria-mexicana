@@ -3,4 +3,5 @@ export interface ICurrentUser {
     isGM: boolean;
     table: Array<string>;
     winner: boolean;
+    winTimes: number;
 }

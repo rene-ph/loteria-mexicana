@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Card } from '../Card/Card';
 import { getCardAnnounced } from './hooks';
@@ -10,12 +10,12 @@ type Props = {
   start?: boolean;
   roomId?: string;
   isGM?: boolean;
+  nextCard?: boolean;
 }
 
-export const CardAnnounced = ({start, roomId, isGM}: Props): JSX.Element => {
+export const CardAnnounced = ({ start, roomId, isGM, nextCard }: Props): JSX.Element => {
 
-    const [card, setCard] = useState(null);    
-    const timerCardRef = useRef<NodeJS.Timer>();
+    const [card, setCard] = useState(null);
 
     useEffect(() => {
       onValue(updateRoomReference(roomId, "initCard"), (snapshot) => {
@@ -24,19 +24,14 @@ export const CardAnnounced = ({start, roomId, isGM}: Props): JSX.Element => {
           setCard(data);
         } 
     });
-    },[start]);
+    },[start, roomId]);
 
     useEffect(() => {
-      // This condition with the isGM is needed in order to not repeat the interval since we have multiple persons using this component
-      // at the same time 
-      if (start && isGM) {
-        timerCardRef.current = setInterval(() => {
-            const cardGenerated = getCardAnnounced();
-            set(updateRoomReference(roomId, "initCard"), cardGenerated);
-        }, 4000);
-        return () => clearInterval(timerCardRef.current as NodeJS.Timeout);
+      if (start && isGM && (nextCard || !nextCard)) {
+          const cardGenerated = getCardAnnounced();
+          set(updateRoomReference(roomId, "initCard"), cardGenerated);
       }
-    }, [start]);
+    }, [start, isGM, roomId, nextCard]);
 
     return ( 
     <Grid container 

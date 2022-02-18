@@ -19,7 +19,8 @@ export const Home = (): JSX.Element => {
          isGM: false,
          // eslint-disable-next-line react-hooks/rules-of-hooks
          table: useGenerationCards(),
-         winner: false
+         winner: false,
+         winTimes: 0
       });
     }
 
